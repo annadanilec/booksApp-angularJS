@@ -1,0 +1,47 @@
+<div class="ui grid">
+  <div class="ui container">
+
+    <form class="ui form">
+      <div class="three fields">
+        <div class="field">
+          <input type="text" ng-model="search.box" ng-change="search.name = search.box; search.author.name = search.box" placeholder="Search by title or author..." />
+          <input type="hidden" ng-model="search.name" />
+          <input type="hidden" ng-model="search.author.name" />
+        </div>
+        <div class="field">
+          <select class="ui fluid seach dropdown" ng-options="category for category in $ctrl.categories" ng-model="search.genre.category">
+            <option value="">All Categoriess</option>
+          </select>
+        </div>
+        <div class="field">
+          <select class="ui fluid seach dropdown" ng-options="genre for genre in $ctrl.genres" ng-model="search.genre.name">
+            <option value="">All Genres</option>
+          </select>
+        </div>
+      </div>
+    </form>
+
+    <div class="ui link cards three column doubling stackable grid">
+      <div class="card" ng-click="$ctrl.setSelected(book.genre.category, book.genre.name, book.name)" dir-paginate="book in $ctrl.books | categoryFilter:search.genre.category | genreFilter:search.genre.name | filter: search.box | itemsPerPage: 6" ui-sref="book({id: book.id})">
+          <div class="image">
+            <img ng-src='{{book.cover}}' alt="book-cover" />
+          </div>
+          <div class="content">
+            <div class="header">{{book.name}}</div>
+            <div class="meta">
+              {{book.author.name}}
+            </div>
+          </div>
+          <div class="extra content">
+            <span class="right floated">
+              Published: <time am-time-ago="book.published"></time>
+            </span>
+            <span>
+              <i class="thumbs outline up icon"></i> {{book.likes}}
+            </span>
+          </div>
+      </div>
+    </div>
+    <dir-pagination-controls boundary-links="true" template-url="app/components/pagination/pagination.html"></dir-pagination-controls>
+  </div>
+</div>

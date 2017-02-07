@@ -1,0 +1,22 @@
+<div class="ui container">
+  <button ui-sref="books" class="ui inverted red button">Go back on the Home Page</button>
+  <div class="ui card long">
+    <div class="content">
+      <div class="right floated meta">Published: <time am-time-ago="$ctrl.book.published"></time></div>
+      <img class="ui avatar image" ng-src="{{$ctrl.book.author.avatar}}" alt="author-avatar"> {{$ctrl.book.author.name}}
+    </div>
+    <div class="image">
+      <img ng-src="{{$ctrl.book.cover}}" alt="book-cover">
+    </div>
+    <div class="content">
+      <h2>{{$ctrl.book.name}}</h2>
+      <span class="right floated">
+        <i class="thumbs outline up icon"></i> {{$ctrl.book.likes}}
+      </span>
+    </div>
+    <div class="extra content">
+      <p ng-repeat="content in $ctrl.book.introduction">{{content.content}}</p>
+    </div>
+  </div>
+  <recommended-books></recommended-books>
+</div>
